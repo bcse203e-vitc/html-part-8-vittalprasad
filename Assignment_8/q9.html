@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Countdown Timer</title>
+    
+    <script>
+        let timer;
+
+        function startCountdown() {
+            let time = parseInt(document.getElementById("timeInput").value);
+            const display = document.getElementById("timer");
+            const audio = new Audio('beep-06.wav');
+
+            if (isNaN(time) || time <= 0) {
+                display.textContent = "Please enter a valid number of seconds.";
+                return;
+            }
+
+            clearInterval(timer);
+            display.textContent = time;
+
+            timer = setInterval(() => {
+                time--;
+                display.textContent = time;
+                if (time <= 0) {
+                    clearInterval(timer);
+                    display.textContent = "Time's up!";
+                    audio.play();
+                }
+            }, 1000);
+        }
+    </script>
+</head>
+<body>
+    <h1>Countdown Timer</h1>
+    <input type="number" id="timeInput" placeholder="Enter time in seconds">
+    <button onclick="startCountdown()">Start</button>
+    <div id="timer"></div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Live Form Validation</title>
+    <style>
+        input { display: block; margin-bottom: 10px; padding: 5px; }
+        .valid { border: 2px solid green; }
+        .invalid { border: 2px solid red; }
+        span { color: red; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <input type="text" id="name" placeholder="Name">
+    <span id="nameError"></span>
+
+    <input type="email" id="email" placeholder="Email">
+    <span id="emailError"></span>
+
+    <input type="password" id="password" placeholder="Password">
+    <span id="passwordError"></span>
+
+    <script>
+        function validateName() {
+            let name = document.getElementById("name");
+            let error = document.getElementById("nameError");
+            if (name.value.trim() === "") {
+                error.innerText = "Name must not be empty";
+                name.classList.add("invalid");
+                name.classList.remove("valid");
+            } else {
+                error.innerText = "";
+                name.classList.remove("invalid");
+                name.classList.add("valid");
+            }
+        }
+
+        function validateEmail() {
+            let email = document.getElementById("email");
+            let error = document.getElementById("emailError");
+            let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            
+            if (!emailPattern.test(email.value)) {
+                error.innerText = "Invalid email format";
+                email.classList.add("invalid");
+                email.classList.remove("valid");
+            } else {
+                error.innerText = "";
+                email.classList.remove("invalid");
+                email.classList.add("valid");
+            }
+        }
+
+        function validatePassword() {
+            let password = document.getElementById("password");
+            let error = document.getElementById("passwordError");
+            let passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+            if (!passwordPattern.test(password.value)) {
+                error.innerText = "Password must be at least 8 characters, with 1 uppercase & 1 number";
+                password.classList.add("invalid");
+                password.classList.remove("valid");
+            } else {
+                error.innerText = "";
+                password.classList.remove("invalid");
+                password.classList.add("valid");
+            }
+        }
+
+        document.getElementById("name").addEventListener("input", validateName);
+        document.getElementById("email").addEventListener("input", validateEmail);
+        document.getElementById("password").addEventListener("input", validatePassword);
+    </script>
+</body>
+</html>

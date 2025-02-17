@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Image Carousel</title>
+</head>
+<body>
+    <img id="carousel" src="https://images.unsplash.com/photo-1739381337576-d14376e305d2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8" width="300">
+    <button onclick="prevImage()">Previous</button>
+    <button onclick="nextImage()">Next</button>
+
+    <script>
+        let images = [
+            "https://images.unsplash.com/photo-1739381337576-d14376e305d2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8", 
+            "https://images.unsplash.com/photo-1739463146961-078f4ac580e3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw4fHx8ZW58MHx8fHx8", 
+            "https://images.unsplash.com/photo-1739381337576-d14376e305d2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8"
+        ];
+        let index = 0;
+        let interval;
+
+        function showImage() {
+            document.getElementById("carousel").src = images[index];
+        }
+        
+        function prevImage() {
+            index = (index - 1 + images.length) % images.length;
+            showImage();
+        }
+
+        function nextImage() {
+            index = (index + 1) % images.length;
+            showImage();
+        }
+
+        function startSlideshow() {
+            interval = setInterval(nextImage, 3000);
+        }
+
+        function stopSlideshow() {
+            clearInterval(interval);
+        }
+
+        startSlideshow();
+
+        document.getElementById("carousel").addEventListener("mouseenter", stopSlideshow);
+        document.getElementById("carousel").addEventListener("mouseleave", startSlideshow);
+    </script>
+</body>
+</html>

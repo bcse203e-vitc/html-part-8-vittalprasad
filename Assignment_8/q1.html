@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="rows" placeholder="Enter rows">
+    <input type="number" id="cols" placeholder="Enter columns">
+    <button onclick="generateTable()">Generate Table</button>
+    <div id="tableContainer"></div>
+
+    <script>
+        function generateTable() {
+            let rows = document.getElementById("rows").value;
+            let cols = document.getElementById("cols").value;
+            let tableContainer = document.getElementById("tableContainer");
+            tableContainer.innerHTML = "";
+
+            let table = document.createElement("table");
+            table.border = "1";
+            for (let i = 0; i < rows; i++) {
+                let row = table.insertRow();
+                for (let j = 0; j < cols; j++) {
+                    let cell = row.insertCell();
+                    cell.innerText = `(${i + 1}, ${j + 1})`;
+                }
+            }
+            tableContainer.appendChild(table);
+        }
+    </script>
+</body>
+</html>
